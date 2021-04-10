@@ -11,7 +11,7 @@
         },
         {"tag": "name",
          "patterns": ["what is your name", "what should I call you", "whats your name?"],
-         "responses": ["You can call me Wellbot", "I'm Wellbot!", "I'm Wellbot aka Welly."],
+         "responses": ["You can call me Wellbot", "I'm Wellbot!", "I'm Wellbot aka Welly"],
          "context_set": ""
         },
         {"tag": "anxiety",
