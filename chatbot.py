@@ -5,6 +5,8 @@ import pickle
 import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
+from speech_recog import recognize
+from text_to_voice import to_speech
 
 from tensorflow.keras.models import load_model
 
@@ -37,13 +39,12 @@ def conv_to_bag(sentence):
 def predict_label(sentence):
     bag_of_words = conv_to_bag(sentence)
     result = model.predict(np.array([bag_of_words]))[0]
-    ERROR_THRESHOLD = 0.25
-    results = [[i, r] for i, r in enumerate(result) if r > ERROR_THRESHOLD]
+    results = [[i, j] for i, j in enumerate(result) if j > 0.25]
 
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
-    for r in results:
-        return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
+    for i in results:
+        return_list.append({'intent': classes[i[0]], 'probability': str(i[1])})
     return return_list
 
 
@@ -59,9 +60,29 @@ def get_response(intents_list, intents_json):
 
 print("Go! Bot is running!")
 
-while True:
-    message = input("")
+
+def prompt_user(tag):
+    prompts_dict = json.loads(open('prompts.json').read())
+    for prompt in prompts_dict['prompts']:
+        if prompt['tag'] == tag:
+            return prompt['responses'][0]
+
+
+def start_bot():
+    message = recognize()
     ints = predict_label(message)
-    res = get_response(ints, intents)
-    print(res)
+    res = to_speech(get_response(ints, intents))
+    print("User:", message)
+    print("Wellbot:", res)
+    print("\n")
+    return message
+
+
+if __name__ == '__main__':
+    intro = prompt_user("welcome")
+
+    print("Wellbot:", to_speech(intro))
+    while True:
+        start_bot()
+
 
