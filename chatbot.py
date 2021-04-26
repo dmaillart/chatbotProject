@@ -40,13 +40,14 @@ def conv_to_bag(sentence):
 def predict_label(sentence):
     bag_of_words = conv_to_bag(sentence)
     result = model.predict(np.array([bag_of_words]))[0]
-    results = [[i, j] for i, j in enumerate(result) if j > 0.25]
-
+    results = [[i, j] for i, j in enumerate(result) if j > 0.6]
+    print(results)
+    return_list = []
     if len(results) == 0:
-        return ['unknown']
+        return_list.append({'intent': 'unknown'})
+        return return_list
 
     results.sort(key=lambda x: x[1], reverse=True)
-    return_list = []
     for i in results:
         return_list.append({'intent': classes[i[0]], 'probability': str(i[1])})
     return return_list
