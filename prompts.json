@@ -3,7 +3,7 @@
          "responses": ["Hi i'm wellbot, the mental health chatbot. Who do I have the pleasure of speaking with?"],
          "context_set": ""
         },
-        {"tag": "user name",
+        {"tag": "user_name",
          "responses": ["Nice to meet you"],
          "context_set": ""
         },
