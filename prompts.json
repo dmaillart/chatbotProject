@@ -7,33 +7,36 @@
          "responses": ["Nice to meet you"],
          "context_set": ""
         },
+        {"tag": "goodbye",
+          "responses": ["It was wonderful talking with you today. Unfortunately I can't ask you any questions currently. Try asking me some questions instead."],
+          "context_set": ""
+        },
+        {
+          "tag": "choice",
+          "responses": ["Would you like to ask me some questions or would you like me to lead you down a conversation path"],
+          "context_set": ""
+        },
         {"tag": "ask about day",
-         "patterns": ["See ya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
-         "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"],
+         "responses": ["I'm glad to hear that", "It's unfortunate that your day didn't go so well"],
          "context_set": ""
         },
         {"tag": "sparks joy",
-         "patterns": ["what is your name", "what should I call you", "whats your name?"],
          "responses": ["You can call me Wellbot", "I'm Wellbot!", "I'm Wellbot aka Welly."],
          "context_set": ""
         },
         {"tag": "what's the problem",
-         "patterns": ["i'm feeling anxious", "i'm worried", "i feel stressed"],
-         "responses": ["Take a deep breath. It's important to control your breathing to calm your body's physical responses"],
+         "responses": ["Am i right to say that you are having problems with"],
          "context_set": ""
         },
         {"tag": "problems with work",
-         "patterns": ["died", "passed away", "no longer here", "passed on"],
          "responses": ["Losing a loved one can be very difficult. I'm here if you would like to talk about it"],
          "context_set": ""
         },
         {"tag": "who is giving you problems",
-         "patterns": ["i'm sad", "i feel sad", "i'm depressed", "i'm not happy", "i'm upset"],
          "responses": ["You are not alone. Everybody feels sad from time to time", "Try to focus on the things that bring you joy"],
          "context_set": ""
         },
         {"tag": "what is giving you problems",
-         "patterns": ["i'm sad", "i feel sad", "i'm depressed", "i'm not happy", "i'm upset"],
          "responses": ["You are not alone. Everybody feels sad from time to time", "Try to focus on the things that bring you joy"],
          "context_set": ""
         }

@@ -73,15 +73,20 @@ def prompt_user(tag):
 
 
 def extract_info(tag):
-    message = recognize()
-    print("User:", message)
-    # Clean the message and then use spacy for entity recognition
-    clean_msg = clean_sentences(message)
+    has_entities = False
+    while not has_entities:
+        message = recognize()
+        print("User:", message)
+        # Clean the message and then use spacy for entity recognition
+        clean_msg = clean_sentences(message)
 
-    spacy_nlp = spacy.load('en_core_web_sm')
-    document = spacy_nlp((" ".join(clean_msg)).strip())
-    # Stores all the entities in the sentence such as names or places
-    entities = []
+        spacy_nlp = spacy.load('en_core_web_sm')
+        document = spacy_nlp((" ".join(clean_msg)).strip())
+        # Stores all the entities in the sentence such as names or places
+        entities = []
+        if len(document.ents) > 0:
+            has_entities = True
+
     print("There are", len(document.ents), "entities")
     print([(X.text, X.label_) for X in document.ents])
     if tag == "user_name":
@@ -90,6 +95,17 @@ def extract_info(tag):
                 entities.append(i.text)
                 print("Here we are")
                 print(i)
+    elif tag == "what's the problem":
+        for j in document.ents:
+            if j.label in ["ART", "EVE", "NAT", "PERSON"]:
+                entities.append(j.text)
+                print(j)
+    elif tag == "ask about day":
+        for k in document.ents:
+            if k.label in ["ART", "EVE", "NAT", "PERSON"]:
+                entities.append(k.text)
+                print(k)
+
     return entities
 
 
@@ -104,9 +120,37 @@ def start_bot():
 
 
 if __name__ == '__main__':
+    ask_bot_questions = True
+    script = [("what's the problem", "What is bothering you today?")]
     intro = prompt_user("welcome")
     print("Wellbot:", to_speech(intro))
     name = prompt_user("user_name") + " " + extract_info("user_name")[0]
     print("Wellbot:", to_speech(name))
-    while True:
-        start_bot()
+    choice = prompt_user("choice")
+    print("Wellbot:", to_speech(choice))
+    print(to_speech("Say one to ask questions or two to let me ask you some questions"))
+    message = recognize()
+    clean_msg = clean_sentences(message)
+    print(clean_msg)
+
+    if clean_msg.__contains__("1"):
+        ask_bot_questions = True
+    else:
+        ask_bot_questions = False
+
+    if ask_bot_questions:
+        while True:
+            start_bot()
+    else:
+        #
+        # prompt = prompt_user(script[0][0])
+        # print("Wellbot:", to_speech(script[0][1]))
+        # extracted_info = extract_info(script[0][0])
+        # response = prompt + " " + extracted_info[0]
+        # print("Wellbot:", response)
+
+        goodbye = prompt_user("goodbye")
+        print("Wellbot:", to_speech(goodbye))
+        exit()
+
+
