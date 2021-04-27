@@ -37,7 +37,7 @@ def extract_wrds_and_classes(intents_dict):
     # Store the words in a pickle file
     pickle.dump(words, open('words.pkl', 'wb'))
     pickle.dump(classes, open('classes.pkl', 'wb'))
-    return words, classes, documents
+    return [words, classes, documents]
 
 
 def train_bow(wrds, clss, docs):
@@ -83,7 +83,7 @@ def train_bow(wrds, clss, docs):
 
 if __name__ == '__main__':
     intents = json.loads(open('intents.json').read())
-
+    extracted_wrds_and_classes = extract_wrds_and_classes(intents)
     # Train the BOW using the words, classes, and the word_list + tag/docs
-    train_bow(extract_wrds_and_classes(intents)[0], extract_wrds_and_classes(intents)[1],
-              extract_wrds_and_classes(intents)[2])
+    train_bow(extracted_wrds_and_classes[0], extracted_wrds_and_classes[1],
+              extracted_wrds_and_classes[2])

@@ -63,7 +63,8 @@ def get_response(intents_list, intents_json):
     return result
 
 
-print("Go! Bot is running!")
+print("WellBot is ready to go!!!")
+print("\n")
 
 
 def prompt_user(tag):
@@ -78,6 +79,7 @@ def extract_info(tag):
     while not has_entities:
         message = recognize()
         print("User:", message)
+        print("\n")
         # Clean the message and then use spacy for entity recognition
         clean_msg = clean_sentences(message)
 
@@ -87,14 +89,13 @@ def extract_info(tag):
         entities = []
         if len(document.ents) > 0:
             has_entities = True
+        elif tag == "user_name":
+            print("Wellbot:", to_speech("Sorry I couldn't quite get the name. Could you repeat that"))
 
-    print("There are", len(document.ents), "entities")
-    print([(X.text, X.label_) for X in document.ents])
     if tag == "user_name":
         for i in document.ents:
-            if i.label_ in ["PERSON"]:
+            if i.label_ in ["PERSON", "ORG"]:
                 entities.append(i.text)
-                print(i)
     elif tag == "what's the problem":
         for j in document.ents:
             if j.label in ["ART", "EVE", "NAT", "PERSON"]:
@@ -110,9 +111,12 @@ def start_bot():
     message = recognize()
     ints = predict_label(message)
     res = to_speech(get_response(ints, intents))
+    goodbye_res = ["Talk to you later", "Sad to see you go :(", "Goodbye!"]
     print("User:", message)
     print("Wellbot:", res)
     print("\n")
+    if res in goodbye_res:
+        exit()
     return message
 
 
