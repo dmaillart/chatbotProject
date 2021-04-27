@@ -28,7 +28,7 @@ def extract_wrds_and_classes(intents_dict):
                 classes.append(intent['tag'])
 
     # Lemmatize words
-    words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
+    words = [lemmatizer.lemmatize(word.lower()) for word in words if word not in stop_words]
     # Store sorted words and classes
     words = sorted(set(words))
 
