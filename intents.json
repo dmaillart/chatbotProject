@@ -31,8 +31,8 @@
         },
         {
           "tag": "unknown",
-          "patterns": [],
-          "responses": ["I don't quite understand. Can you repeat that please?"],
+          "pattern": [],
+          "responses": [],
           "context_set": ""
         }
    ]
