@@ -94,19 +94,15 @@ def extract_info(tag):
         for i in document.ents:
             if i.label_ in ["PERSON"]:
                 entities.append(i.text)
-                print("Here we are")
                 print(i)
     elif tag == "what's the problem":
         for j in document.ents:
             if j.label in ["ART", "EVE", "NAT", "PERSON"]:
                 entities.append(j.text)
-                print(j)
     elif tag == "ask about day":
         for k in document.ents:
             if k.label in ["ART", "EVE", "NAT", "PERSON"]:
                 entities.append(k.text)
-                print(k)
-
     return entities
 
 
@@ -143,13 +139,6 @@ if __name__ == '__main__':
         while True:
             start_bot()
     else:
-        #
-        # prompt = prompt_user(script[0][0])
-        # print("Wellbot:", to_speech(script[0][1]))
-        # extracted_info = extract_info(script[0][0])
-        # response = prompt + " " + extracted_info[0]
-        # print("Wellbot:", response)
-
         goodbye = prompt_user("goodbye")
         print("Wellbot:", to_speech(goodbye))
         exit()
