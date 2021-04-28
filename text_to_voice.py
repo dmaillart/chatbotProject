@@ -1,4 +1,5 @@
-# Text to voice module for welbot
+# Text to voice module for wellbot
+# pip install pyttsx3
 import pyttsx3
 
 
