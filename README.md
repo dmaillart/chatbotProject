@@ -9,7 +9,8 @@ To run the program you must first make sure that you have the necessary dependen
   6. TextToSpeech (pyttsx3)   [pip install pyttsx3]
   
   
-Within speech_recog.py, it also may be necessary for the user to update the device_index variable in order for the program to use the microphone.
+  
+Start by running train.py to generate the model needed to predict user responses. Afterwards run chatbot.py(Driver). Within speech_recog.py, it also may be necessary for the user to update the device_index variable in order for the program to use the microphone.
 A list of available microphone devices and their indexes can be found by uncommenting lines 7 & 8 and then running the script.
 
 Once the necessary packages are installed and the correct microphone is identified, to run the program the user should first run the train.py script and let it train the model. Once that finishes, the user will run chatbot.py and begin communicating with Wellbot.
