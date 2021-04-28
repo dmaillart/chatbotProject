@@ -15,19 +15,25 @@
          "context_set": ""
         },
         {"tag": "anxiety",
-         "patterns": ["i'm feeling anxious", "i'm worried", "i feel stressed"],
+         "patterns": ["anxious", "worried", "stressed", "nervous"],
          "responses": ["Take a deep breath. It's important to control your breathing to calm your body's physical responses"],
          "context_set": ""
         },
         {"tag": "grief",
-         "patterns": ["died", "passed away", "no longer here", "passed on"],
+         "patterns": ["died", "dead", "passed away", "no longer here", "passed on"],
          "responses": ["Losing a loved one can be very difficult. I'm here if you would like to talk about it"],
          "context_set": ""
         },
         {"tag": "sad",
-         "patterns": ["i'm sad", "i feel sad", "i'm depressed", "i'm not happy", "i'm upset"],
+         "patterns": ["sad", "miserable", "depressed", "unhappy", "upset"],
          "responses": ["You are not alone. Everybody feels sad from time to time", "Try to focus on the things that bring you joy"],
          "context_set": ""
+        },
+        {
+          "tag": "unknown",
+          "patterns": [],
+          "responses": ["I don't quite understand. Could you say that again?"],
+          "context_set": ""
         }
    ]
 }
